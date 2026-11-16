@@ -8,5 +8,5 @@ repository = "https://github.com/mtorromeo/zed-icinga"
 
 [grammars.icinga]
 repository = "https://github.com/mtorromeo/zed-icinga"
-rev = "PENDING"
+rev = "30e24a18aa24397de30a2c3af08713b2aaa79092"
 path = "grammar"
