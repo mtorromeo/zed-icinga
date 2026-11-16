@@ -1,0 +1,150 @@
+================================================================================
+Numbers and durations
+================================================================================
+
+x = [ 1, 2.5, 30s, 5m, 1.5h, 1d, 100ms ]
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (assignment
+    (identifier)
+    (array
+      (number)
+      (number)
+      (number)
+      (number)
+      (number)
+      (number)
+      (number))))
+
+================================================================================
+Strings with escapes and macros
+================================================================================
+
+x = "a \"quoted\" $$ \t\\ \101 $host.name$"
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (assignment
+    (identifier)
+    (string
+      (string_content)
+      (escape_sequence)
+      (string_content)
+      (escape_sequence)
+      (string_content)
+      (escape_sequence)
+      (string_content)
+      (escape_sequence)
+      (escape_sequence)
+      (string_content)
+      (escape_sequence)
+      (string_content)
+      (macro))))
+
+================================================================================
+Multi-line string
+================================================================================
+
+x = {{{line one
+line "two" with } and }}
+}}}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (assignment
+    (identifier)
+    (multiline_string)))
+
+================================================================================
+Escaped identifier
+================================================================================
+
+vars.@include = "x"
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (assignment
+    (member_expression
+      (identifier)
+      (property_identifier))
+    (string
+      (string_content))))
+
+================================================================================
+Dictionaries
+================================================================================
+
+vars.http = {
+  "uri /" = { http_uri = "/" },
+  ssl = true; port = 443
+}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (assignment
+    (member_expression
+      (identifier)
+      (property_identifier))
+    (dictionary
+      (assignment
+        (string
+          (string_content))
+        (dictionary
+          (assignment
+            (identifier)
+            (string
+              (string_content)))))
+      (assignment
+        (identifier)
+        (boolean))
+      (assignment
+        (identifier)
+        (number)))))
+
+================================================================================
+Comments
+================================================================================
+
+# shell
+// cpp
+/* block
+ * comment */
+x = 1 # trailing
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (comment)
+  (comment)
+  (comment)
+  (assignment
+    (identifier)
+    (number))
+  (comment))
+
+================================================================================
+Builtin values
+================================================================================
+
+x = [ true, false, null, this, globals, locals, current_filename, current_line ]
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (assignment
+    (identifier)
+    (array
+      (boolean)
+      (boolean)
+      (null)
+      (this)
+      (globals)
+      (locals)
+      (current_filename)
+      (current_line))))

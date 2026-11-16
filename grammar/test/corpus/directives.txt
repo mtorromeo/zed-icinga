@@ -1,0 +1,62 @@
+================================================================================
+Includes
+================================================================================
+
+include <itl>
+include "conf.d/*.conf"
+include_recursive "conf.d", "*.conf"
+include_zones "director", "zones.d", "*.conf"
+library "methods"
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (include_directive
+    (system_path))
+  (include_directive
+    (string
+      (string_content)))
+  (include_directive
+    (string
+      (string_content))
+    (string
+      (string_content)))
+  (include_directive
+    (string
+      (string_content))
+    (string
+      (string_content))
+    (string
+      (string_content)))
+  (library_directive
+    (string
+      (string_content))))
+
+================================================================================
+Constants and using
+================================================================================
+
+const PluginDir = "/usr/lib/nagios/plugins"
+using Internal
+namespace Utils {
+  function f() { 1 }
+}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (const_declaration
+    (constant)
+    (string
+      (string_content)))
+  (using_statement
+    (identifier))
+  (namespace_declaration
+    (identifier)
+    (block
+      (function_declaration
+        (identifier)
+        (parameters)
+        (block
+          (expression_statement
+            (number)))))))

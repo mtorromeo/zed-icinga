@@ -1,0 +1,12 @@
+id = "icinga"
+name = "Icinga"
+version = "1.0.0"
+schema_version = 1
+authors = ["Massimiliano Torromeo <massimiliano.torromeo@gmail.com>"]
+description = "Icinga 2 configuration language support"
+repository = "https://github.com/mtorromeo/zed-icinga"
+
+[grammars.icinga]
+repository = "https://github.com/mtorromeo/zed-icinga"
+rev = "PENDING"
+path = "grammar"

@@ -1,0 +1,22 @@
+{
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/config.schema.json",
+  "grammars": [
+    {
+      "name": "icinga",
+      "camelcase": "Icinga",
+      "title": "Icinga 2",
+      "scope": "source.icinga2",
+      "path": ".",
+      "file-types": ["icinga2.conf", "icinga2", "icinga"],
+      "highlights": "../languages/icinga/highlights.scm",
+      "injection-regex": "^(icinga|icinga2)$"
+    }
+  ],
+  "metadata": {
+    "version": "1.0.0",
+    "license": "MIT",
+    "description": "Icinga 2 configuration language grammar",
+    "authors": [{ "name": "Massimiliano Torromeo", "email": "massimiliano.torromeo@gmail.com" }],
+    "links": { "repository": "https://github.com/mtorromeo/zed-icinga" }
+  }
+}

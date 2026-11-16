@@ -1,0 +1,198 @@
+================================================================================
+Object declaration
+================================================================================
+
+object Host "web01" {
+  import "generic-host"
+  address = "192.0.2.10"
+  vars.os = "Linux"
+}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (object_declaration
+    (type_identifier)
+    (string
+      (string_content))
+    (block
+      (import_statement
+        (string
+          (string_content)))
+      (assignment
+        (identifier)
+        (string
+          (string_content)))
+      (assignment
+        (member_expression
+          (identifier)
+          (property_identifier))
+        (string
+          (string_content))))))
+
+================================================================================
+Template with default and ignore_on_error
+================================================================================
+
+template Service "generic" default ignore_on_error {
+  check_interval = 5m
+}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (template_declaration
+    (type_identifier)
+    (string
+      (string_content))
+    (default)
+    (ignore_on_error)
+    (block
+      (assignment
+        (identifier)
+        (number)))))
+
+================================================================================
+Object with expression name
+================================================================================
+
+object Endpoint NodeName + ".local" { }
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (object_declaration
+    (type_identifier)
+    (binary_expression
+      (identifier)
+      (string
+        (string_content)))
+    (block)))
+
+================================================================================
+Apply rule with assign and ignore where
+================================================================================
+
+apply Service "ping4" {
+  assign where host.address && host.vars.os in [ "Linux" ]
+  ignore where host.vars.os !in [ "Linux" ] || match("t-*", host.name)
+}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (apply_rule
+    (type_identifier)
+    (string
+      (string_content))
+    (block
+      (assign_where
+        (binary_expression
+          (member_expression
+            (identifier)
+            (property_identifier))
+          (binary_expression
+            (member_expression
+              (member_expression
+                (identifier)
+                (property_identifier))
+              (property_identifier))
+            (array
+              (string
+                (string_content))))))
+      (ignore_where
+        (binary_expression
+          (binary_expression
+            (member_expression
+              (member_expression
+                (identifier)
+                (property_identifier))
+              (property_identifier))
+            (array
+              (string
+                (string_content))))
+          (call_expression
+            (identifier)
+            (arguments
+              (string
+                (string_content))
+              (member_expression
+                (identifier)
+                (property_identifier)))))))))
+
+================================================================================
+Apply for rule with target
+================================================================================
+
+apply Service "if-" for (name => config in host.vars.interfaces) to Host {
+  vars += config
+}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (apply_rule
+    (type_identifier)
+    (string
+      (string_content))
+    (apply_for
+      (identifier)
+      (identifier)
+      (member_expression
+        (member_expression
+          (identifier)
+          (property_identifier))
+        (property_identifier)))
+    (type_identifier)
+    (block
+      (assignment
+        (identifier)
+        (identifier)))))
+
+================================================================================
+Apply for rule over array
+================================================================================
+
+apply Service for (var disk in host.vars.disks) { }
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (apply_rule
+    (type_identifier)
+    (apply_for
+      (identifier)
+      (member_expression
+        (member_expression
+          (identifier)
+          (property_identifier))
+        (property_identifier)))
+    (block)))
+
+================================================================================
+Assign where with block
+================================================================================
+
+apply Dependency "dep" to Service {
+  assign where {
+    var ok = true
+    return ok
+  }
+}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (apply_rule
+    (type_identifier)
+    (string
+      (string_content))
+    (type_identifier)
+    (block
+      (assign_where
+        (dictionary
+          (variable_declaration
+            (identifier)
+            (boolean))
+          (return_statement
+            (identifier)))))))

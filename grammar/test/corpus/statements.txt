@@ -1,0 +1,117 @@
+================================================================================
+If else on separate lines
+================================================================================
+
+if (a) {
+  b
+}
+else if (c) {
+  d
+}
+else {
+  e
+}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (expression_statement
+    (if_expression
+      (identifier)
+      (block
+        (expression_statement
+          (identifier)))
+      (else_if_clause
+        (identifier)
+        (block
+          (expression_statement
+            (identifier))))
+      (else_clause
+        (block
+          (expression_statement
+            (identifier)))))))
+
+================================================================================
+Loops
+================================================================================
+
+for (var k => var v in dict) { log(k) }
+for (item in list) { continue }
+while (true) { break }
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (for_statement
+    (identifier)
+    (identifier)
+    (identifier)
+    (block
+      (expression_statement
+        (call_expression
+          (identifier)
+          (arguments
+            (identifier))))))
+  (for_statement
+    (identifier)
+    (identifier)
+    (block
+      (continue_statement)))
+  (while_statement
+    (boolean)
+    (block
+      (break_statement))))
+
+================================================================================
+Functions and control flow
+================================================================================
+
+function f(a, b) use (c) {
+  return a + b
+}
+function g() {
+  return
+}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (function_declaration
+    (identifier)
+    (parameters
+      (identifier)
+      (identifier))
+    (use_clause
+      (use_item
+        (identifier)))
+    (block
+      (return_statement
+        (binary_expression
+          (identifier)
+          (identifier)))))
+  (function_declaration
+    (identifier)
+    (parameters)
+    (block
+      (return_statement))))
+
+================================================================================
+Try except throw debugger
+================================================================================
+
+try {
+  throw "error"
+} except {
+  debugger
+}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (try_statement
+    (block
+      (throw_statement
+        (string
+          (string_content))))
+    (block
+      (debugger_statement))))
